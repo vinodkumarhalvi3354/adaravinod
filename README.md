@@ -31,7 +31,6 @@ AdaraVinod is a AI-driven web application that offers real-time audio transcript
   ```bash
   npm run dev
   ```
-  The Whisper model from Hugging Face is fetched, and transcription works as expected.
 
 - **Deployed Environment (Firebase Hosting)**: 
   After deploying the app to Firebase Hosting, the transcription does not work because the model is not loading properly. This may be due to:
