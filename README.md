@@ -1,3 +1,4 @@
+
 # AdaraVinod
 
 AdaraVinod is a AI-driven web application that offers real-time audio transcription and translation. It utilizes state-of-the-art models like OpenAI's Whisper for speech recognition and Xenova's NLLB-200 for translations, providing accurate and timestamped text outputs. 
