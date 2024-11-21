@@ -20,6 +20,30 @@ AdaraVinod is a AI-driven web application that offers real-time audio transcript
 - **Node.js** (v16 or higher)
 - **npm** (v7 or higher)
 
+
+## Known Issues
+
+### **Current Issue with Model Transcription**
+
+- **Development Environment**:
+  The app works correctly in the development environment when running locally using:
+
+  ```bash
+  npm run dev
+  ```
+  The Whisper model from Hugging Face is fetched, and transcription works as expected.
+
+- **Deployed Environment (Firebase Hosting)**: 
+  After deploying the app to Firebase Hosting, the transcription does not work because the model is not loading properly. This may be due to:
+   1. Network restrictions or incorrect model URL resolution in the deployed environment.
+   2. Missing ONNX files or model dependencies in the Hugging Face repository.
+   3. CORS or MIME type issues when fetching model files in production.
+
+    
+- **Translation Support** (Currently Not Working): 
+  The app includes a translation feature to convert transcribed text into another language, but it is not functional yet.
+
+
 ### Installation
 
 1. Clone the repository:
@@ -61,11 +85,12 @@ firebase init hosting
 ```
 
 Follow the prompts:
-•	Select your Firebase project or create a new one.
-•	Set the public directory to dist.
-•	Choose Yes to configure the app as a single-page application (rewrite all URLs to /index.html).
-•	Skip automatic GitHub deployments for now (optional).
-b. Deploy the Application
+1. Select your Firebase project or create a new one.
+2. Set the public directory to dist.
+3.	Choose Yes to configure the app as a single-page application (rewrite all URLs to /index.html).
+4.	Skip automatic GitHub deployments for now (optional).
+
+Deploy the Application
 
 Deploy your app to Firebase Hosting:
 
