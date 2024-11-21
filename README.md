@@ -35,8 +35,7 @@ AdaraVinod is a AI-driven web application that offers real-time audio transcript
 - **Deployed Environment (Firebase Hosting)**: 
   After deploying the app to Firebase Hosting, the transcription does not work because the model is not loading properly. This may be due to:
    1. Network restrictions or incorrect model URL resolution in the deployed environment.
-   2. Missing ONNX files or model dependencies in the Hugging Face repository.
-   3. CORS or MIME type issues when fetching model files in production.
+   2. CORS or MIME type issues when fetching model files in production.
 
     
 - **Translation Support** (Currently Not Working): 
@@ -49,7 +48,7 @@ AdaraVinod is a AI-driven web application that offers real-time audio transcript
 
    ```bash
    git clone https://github.com/vinodkumarhalvi3354/adaravinod.git
-   cd adaravinod
+   cd adaravinod-main
    ```
 
 2. Install dependencies:
