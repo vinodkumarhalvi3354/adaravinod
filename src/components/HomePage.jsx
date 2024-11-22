@@ -1,21 +1,29 @@
 import React, { useState, useEffect, useRef } from "react";
 
 export default function HomePage(props) {
+  //setAudioStream: A function passed from the parent component, used to store the audio stream (e.g., recorded audio).
+  //setFile: A function passed from the parent component, used to store an uploaded audio file.
+
   const { setAudioStream, setFile } = props;
 
-  const [recordingStatus, setRecordingStatus] = useState("inactive");
-  const [audioChunks, setAudioChunks] = useState([]);
-  const [duration, setDuration] = useState(0);
+  const [recordingStatus, setRecordingStatus] = useState("inactive"); //Purpose: Tracks whether recording is in progress ("recording") or stopped ("inactive").
 
-  const mediaRecorder = useRef(null);
+  const [audioChunks, setAudioChunks] = useState([]); // Stores chunks of audio data captured during recording.
+  const [duration, setDuration] = useState(0); //Tracks the duration of the current recording.
 
-  const mimeType = "audio/webm";
+  const mediaRecorder = useRef(null); //Stores a reference to the MediaRecorder object, which handles audio recording in the browser.
+
+  const mimeType = "audio/webm"; //Determines the output format for the MediaRecorder
 
   async function startRecording() {
-    let tempStream;
+    let tempStream; //Used to store the audio stream from the microphone so it can be passed to the MediaRecorder
     console.log("Start recording");
 
     try {
+      /*
+      Asks the user for permission to access their microphone or camera.
+      Returns a MediaStream containing the audio (and/or video) data.
+      */
       const streamData = await navigator.mediaDevices.getUserMedia({
         audio: true,
         video: false,
@@ -27,12 +35,25 @@ export default function HomePage(props) {
     }
     setRecordingStatus("recording");
 
+    /*
+    Initializes a new MediaRecorder instance using the MediaStream (tempStream) as input.
+    Encodes the recorded audio data into the format specified by mimeType
+    */
+
     //create new Media recorder instance using the stream
     const media = new MediaRecorder(tempStream, { type: mimeType });
-    mediaRecorder.current = media;
+    mediaRecorder.current = media; //Stores the MediaRecorder instance in the mediaRecorder reference for future use
 
+    /*
+    Starts recording audio using the MediaRecorder instance.
+    Recording begins immediately, and data will be captured in chunks as it becomes available.
+    */
     mediaRecorder.current.start();
     let localAudioChunks = [];
+    /*
+    Fires whenever a chunk of audio data is available.
+    The event.data contains the recorded data as a Blob.
+    */
     mediaRecorder.current.ondataavailable = (event) => {
       if (typeof event.data === "undefined") {
         return;
